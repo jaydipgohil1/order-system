@@ -1,0 +1,90 @@
+<div class="LoginPageContainer">
+  <div class="LoginPageInnerContainer">
+    <div class="ImageContianer">
+      <img src="https://i.imgur.com/MYZd7of.png" class="GroupImage" />
+    </div>
+    <div class="LoginFormContainer">
+      <div class="LoginFormInnerContainer">
+        <div class="LogoContainer">
+          <img src="../../assets/big_thumb.jpg" class="logo" />
+        </div>
+        <header class="header">Log In</header>
+        <header class="subHeader">
+          Welcome to <b>Inventory Management System!</b> Please Enter your
+          Details
+        </header>
+
+        <form action="" [formGroup]="loginForm">
+          <div class="inputContainer">
+            <label class="label" for="emailAddress"
+              ><img
+                src="https://i.imgur.com/Hn13wvm.png"
+                class="labelIcon"
+              /><span>Email Address*</span></label
+            >
+            <input
+              type="email"
+              class="input"
+              id="emailAddress"
+              placeholder="Enter your Email Address"
+              required
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                (loginForm.get('email')?.dirty ||
+                  (loginForm.get('email')?.invalid &&
+                    loginForm.get('email')?.touched))
+              "
+              class="error-message"
+            >
+              Invalid Email.
+            </div>
+          </div>
+          <div class="inputContainer">
+            <label class="label" for="emailAddress"
+              ><img
+                src="https://i.imgur.com/g5SvdfG.png"
+                class="labelIcon"
+              /><span>Password*</span></label
+            >
+            <input
+              type="password"
+              class="input"
+              id="emailAddress"
+              placeholder="Enter your Password"
+              required
+              formControlName="password"
+              maxlength="8"
+            />
+            <div
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                (loginForm.get('password')?.dirty ||
+                  (loginForm.get('password')?.invalid &&
+                    loginForm.get('password')?.touched))
+              "
+              class="error-message"
+            >
+              Invalid password.
+            </div>
+          </div>
+          <div class="OptionsContainer">
+            <p>
+              Don't have an account? <a [routerLink]="'/sign-up'">Sign Up</a>.
+            </p>
+            <!-- <a href="#" class="ForgotPasswordLink">Forgot Password?</a> -->
+          </div>
+          <button
+            class="LoginButton register-btn"
+            (click)="onSubmit()"
+            [disabled]="loginForm.invalid"
+          >
+            Log In
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

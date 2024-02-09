@@ -1,0 +1,80 @@
+<div class="dashboard" *ngIf="isLogin">
+  <div
+    class="dashboard-nav"
+    id="dashboard-nav"
+    [class.mobile-show]="isDashboardNavShown"
+  >
+    <header>
+      <a class="menu-toggle" (click)="toggleDashboardNav()">
+        <i class="fa fa-times"></i>
+      </a>
+      <a [routerLink]="'/home'" class="brand-logo">
+        <img
+          width="180px"
+          height="90px"
+          src="../../assets/big_thumb.jpg"
+          class="logo"
+        />
+      </a>
+    </header>
+    <nav class="dashboard-nav-list">
+      <a [routerLink]="'/home'" class="dashboard-nav-item"
+        ><i class="fa fa-home"></i> Home
+      </a>
+      <!-- <a [routerLink]="'/dashboard'" class="dashboard-nav-item active"
+        ><i class="fa fa-tachometer"></i> dashboard </a
+      > -->
+      <div class="dashboard-nav-dropdown">
+        <a class="dashboard-nav-item dashboard-nav-dropdown-toggle"
+          ><i class="fa fa-users" aria-hidden="true"></i> Users
+        </a>
+        <div class="dashboard-nav-dropdown-menu">
+          <a [routerLink]="'/users'" class="dashboard-nav-dropdown-item">All</a>
+        </div>
+      </div>
+      <div class="dashboard-nav-dropdown">
+        <a class="dashboard-nav-item dashboard-nav-dropdown-toggle"
+          ><i class="fa fa-brands fa-product-hunt" aria-hidden="true"></i>
+          Product
+        </a>
+        <div class="dashboard-nav-dropdown-menu">
+          <a [routerLink]="'/product'" class="dashboard-nav-dropdown-item"
+            >Products</a
+          >
+          <a [routerLink]="'/category'" class="dashboard-nav-dropdown-item"
+            >Category</a
+          >
+        </div>
+      </div>
+      <a [routerLink]="'/profile'" class="dashboard-nav-item"
+        ><i class="fa fa-user" aria-hidden="true"></i> Profile
+      </a>
+      <div class="nav-item-divider"></div>
+      <a href="#" class="dashboard-nav-item" (click)="logOut()"
+        ><i class="fa fa-sign-out" aria-hidden="true"></i> Logout
+      </a>
+    </nav>
+  </div>
+  <div class="dashboard-app">
+    <header class="dashboard-toolbar">
+      <a
+        class="menu-toggle"
+        #dashboardNav
+        *ngIf="isMobileScreen && !isDashboardNavShown"
+        (click)="toggleDashboardNav()"
+      >
+        <i class="fa fa-solid fa-bars"></i>
+      </a>
+      <h1 class="top-title">{{ mainTitle || "" }}</h1>
+    </header>
+    <div class="dashboard-content">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+<div class="LoginPageContainer">
+  <div class="LoginPageInnerContainer">
+    <div class="ImageContianer">
+      <img src="https://i.imgur.com/MYZd7of.png" class="GroupImage" />
+    </div>
+    <div class="LoginFormContainer">
+      <div class="LoginFormInnerContainer">
+        <div class="LogoContainer">
+          <img src="../../assets/big_thumb.jpg" class="logo" />
+        </div>
+        <header class="header">Sign Up</header>
+        <header class="subHeader">
+          Welcome to <b>Inventory Management System!</b> Please Enter your
+          Details
+        </header>
+
+        <form action="" [formGroup]="registerForm">
+          <div class="inputContainer">
+            <label class="label" for="emailAddress"
+              ><img src="../../assets/w3UEu8o.jpeg" class="labelIcon" />
+              <span>Name*</span></label
+            >
+            <input
+              type="text"
+              class="input"
+              id="nameAddress"
+              placeholder="Enter your Name"
+              required
+              formControlName="name"
+            />
+            <div
+              *ngIf="
+                registerForm.get('name')?.invalid &&
+                (registerForm.get('name')?.dirty ||
+                  (registerForm.get('name')?.invalid &&
+                    registerForm.get('name')?.touched))
+              "
+              class="error-message"
+            >
+              Invalid name.
+            </div>
+          </div>
+          <div class="inputContainer">
+            <label class="label" for="emailAddress"
+              ><img
+                src="https://i.imgur.com/Hn13wvm.png"
+                class="labelIcon"
+              /><span>Email Address*</span></label
+            >
+            <input
+              type="email"
+              class="input"
+              id="emailAddress"
+              placeholder="Enter your Email Address"
+              required
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                registerForm.get('email')?.invalid &&
+                (registerForm.get('email')?.dirty ||
+                  (registerForm.get('email')?.invalid &&
+                    registerForm.get('email')?.touched))
+              "
+              class="error-message"
+            >
+              Invalid Email.
+            </div>
+          </div>
+          <div class="inputContainer">
+            <label class="label" for="emailAddress"
+              ><img
+                src="https://i.imgur.com/g5SvdfG.png"
+                class="labelIcon"
+              /><span>Password*</span></label
+            >
+            <input
+              type="password"
+              class="input"
+              id="emailAddress"
+              placeholder="Enter your Password"
+              required
+              formControlName="password"
+              maxlength="8"
+            />
+            <div
+              *ngIf="
+                registerForm.get('password')?.invalid &&
+                (registerForm.get('password')?.dirty ||
+                  (registerForm.get('password')?.invalid &&
+                    registerForm.get('password')?.touched))
+              "
+              class="error-message"
+            >
+              Invalid password.
+            </div>
+          </div>
+          <div class="OptionsContainer">
+            <p>
+              Already have an account? <a [routerLink]="'/log-in'">Log In</a>.
+            </p>
+            <!-- <a href="#" class="ForgotPasswordLink">Forgot Password?</a> -->
+          </div>
+          <button
+            class="LoginButton register-btn"
+            (click)="onSubmit()"
+            [disabled]="registerForm.invalid"
+          >
+            Sign Up
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
