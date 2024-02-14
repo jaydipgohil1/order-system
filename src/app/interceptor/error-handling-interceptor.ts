@@ -28,11 +28,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           else if (error.statusText === "Not Found") message = 'Url Not Found';
           else if (error.status === 403 && error.statusText === "Forbidden") {
             message = error?.error?.message
-            localStorage.removeItem('token');
-            this.router.navigate(['/log-in']);
-            this.authService.setIsAuthentic(false);
+            // localStorage.removeItem('token');
+            // this.router.navigate(['/log-in']);
+            // this.authService.setIsAuthentic(false);
           }
-          else message = error?.error?.message;
+          else message = error?.error?.message || error?.error;
           this.notificationService.showError(message);
           return throwError(() => message);
         })

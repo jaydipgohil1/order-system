@@ -23,7 +23,7 @@
       </a>
       <!-- <a [routerLink]="'/dashboard'" class="dashboard-nav-item active"
         ><i class="fa fa-tachometer"></i> dashboard </a
-      > -->
+      >
       <div class="dashboard-nav-dropdown">
         <a class="dashboard-nav-item dashboard-nav-dropdown-toggle"
           ><i class="fa fa-users" aria-hidden="true"></i> Users
@@ -31,24 +31,26 @@
         <div class="dashboard-nav-dropdown-menu">
           <a [routerLink]="'/users'" class="dashboard-nav-dropdown-item">All</a>
         </div>
-      </div>
+      </div>-->
       <div class="dashboard-nav-dropdown">
-        <a class="dashboard-nav-item dashboard-nav-dropdown-toggle"
+        <a [routerLink]="'/customer'" class="dashboard-nav-item">
+          <i class="fa fa-user" aria-hidden="true"> </i>
+          Customer
+        </a>
+        <a [routerLink]="'/product'" class="dashboard-nav-item"
           ><i class="fa fa-brands fa-product-hunt" aria-hidden="true"></i>
           Product
         </a>
-        <div class="dashboard-nav-dropdown-menu">
-          <a [routerLink]="'/product'" class="dashboard-nav-dropdown-item"
-            >Products</a
-          >
-          <a [routerLink]="'/category'" class="dashboard-nav-dropdown-item"
-            >Category</a
-          >
-        </div>
+        <a [routerLink]="'/order'" class="dashboard-nav-item"
+          ><i class="fa fa-solid fa-book" aria-hidden="true"></i>
+          Orders
+        </a>
       </div>
-      <a [routerLink]="'/profile'" class="dashboard-nav-item"
+
+      <!-- <a [routerLink]="'/profile'" class="dashboard-nav-item"
         ><i class="fa fa-user" aria-hidden="true"></i> Profile
-      </a>
+      </a> -->
+
       <div class="nav-item-divider"></div>
       <a href="#" class="dashboard-nav-item" (click)="logOut()"
         ><i class="fa fa-sign-out" aria-hidden="true"></i> Logout

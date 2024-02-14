@@ -7,12 +7,12 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { IDialog } from 'src/shared/common/i-dialog/i-dialog.component';
 
 @Component({
-  selector: 'app-add-update-product',
-  templateUrl: './add-update-product.component.html',
-  styleUrls: ['./add-update-product.component.css']
+  selector: 'app-add-update-customer',
+  templateUrl: './add-update-customer.component.html',
+  styleUrls: ['./add-update-customer.component.css']
 })
-export class AddUpdateProductComponent {
-  productForm: FormGroup;
+export class AddUpdateCustomerComponent {
+  customerForm: FormGroup;
   categories: Category[] = [];
 
   constructor(
@@ -23,23 +23,19 @@ export class AddUpdateProductComponent {
     @Inject(MAT_DIALOG_DATA) public data: ProductDialogData,
   ) {
     if (!data.isUpdate) {
-      this.productForm = this.fb.group({
-        productName: ['', [Validators.required, Validators.maxLength(30)]],
-        productDescription: [null],
-        productCostPrice: ['', Validators.required],
-        productSellingPrice: [0],
-        productQuantityInStock: ['', Validators.required],
-        productReorderPoint: [0],
+      this.customerForm = this.fb.group({
+        customerName: ['', [Validators.required, Validators.maxLength(30)]],
+        customerEmail: ['', [Validators.required, Validators.email]],
+        customerPhone: [null, Validators.pattern("^((\\+91)|(0091))-{0,1}\\d{3}-{0,1}\\d{6}$|^\\d{10}$|^\\d{4}-\\d{6}$")],
+        customerAddress: [null],
       });
     } else {
       const formValue = this.data?.data?.element;
-      this.productForm = this.fb.group({
-        productName: [formValue.productName, [Validators.required, Validators.maxLength(30)]],
-        productDescription: [formValue.productDescription],
-        productCostPrice: [formValue.productCostPrice, Validators.required],
-        productSellingPrice: [formValue.productSellingPrice, Validators.required],
-        productQuantityInStock: [formValue.productQuantityInStock, Validators.required],
-        productReorderPoint: [formValue.productReorderPoint],
+      this.customerForm = this.fb.group({
+        customerName: [formValue.customerName, [Validators.required, Validators.maxLength(30)]],
+        customerEmail: [formValue.customerEmail, [Validators.required, Validators.email]],
+        customerPhone: [formValue.customerPhone || null, Validators.pattern("^((\\+91)|(0091))-{0,1}\\d{3}-{0,1}\\d{6}$|^\\d{10}$|^\\d{4}-\\d{6}$")],
+        customerAddress: [formValue.customerAddress || null],
       });
     }
     this.categories = this.data?.data?.categories;
@@ -52,7 +48,7 @@ export class AddUpdateProductComponent {
   onSaveClick(): void {
     this.data = {
       ...this.data,
-      form: this.productForm,
+      form: this.customerForm,
       component: this.data.component.name
     }
     this.dialogRef.close(this.data);

@@ -21,6 +21,11 @@ import { DeleteDialogComponent } from 'src/shared/common/delete-dialog/delete-di
 import { ProductComponent } from './product/product.component';
 import { IDialogComponent } from 'src/shared/common/i-dialog/i-dialog.component';
 import { AddUpdateProductComponent } from './product/add-update-product/add-update-product.component';
+import { CustomerComponent } from './customer/customer.component';
+import { AddUpdateCustomerComponent } from './customer/add-update-customer/add-update-customer.component';
+import { OrderComponent } from './order/order.component';
+import { AddUpdateOrderComponent } from './order/add-update-order/add-update-order.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +39,11 @@ import { AddUpdateProductComponent } from './product/add-update-product/add-upda
     UsersComponent,
     CategoryComponent,
     ProductComponent,
-    AddUpdateProductComponent
+    AddUpdateProductComponent,
+    CustomerComponent,
+    AddUpdateCustomerComponent,
+    OrderComponent,
+    AddUpdateOrderComponent
   ],
   imports: [
     BrowserModule,

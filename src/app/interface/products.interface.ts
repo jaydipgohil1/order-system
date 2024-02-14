@@ -12,6 +12,7 @@ export interface DialogData {
 
 export interface Product {
   _id?: string,
+  productId?: string,
   product_name: String;
   description: String,
   category_id: String,

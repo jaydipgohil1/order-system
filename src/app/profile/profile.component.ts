@@ -18,8 +18,8 @@ export class ProfileComponent {
   }
 
   logOut() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/log-in']);
-    this.authService.setIsAuthentic(false);
+    // localStorage.removeItem('token');
+    // this.router.navigate(['/log-in']);
+    // this.authService.setIsAuthentic(false);
   }
 }

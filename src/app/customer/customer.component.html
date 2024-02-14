@@ -6,7 +6,7 @@
       class="demo-button"
       (click)="openAddProductDialog(null)"
     >
-      <a class="dashboard-nav-dropdown-item">Add Product</a>
+      <a class="dashboard-nav-dropdown-item">Add Customer</a>
 
       <mat-icon>add</mat-icon>
     </button>
@@ -19,42 +19,25 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="productName">
+    <ng-container matColumnDef="customerName">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element?.productName }}</td>
+      <td mat-cell *matCellDef="let element">{{ element?.customerName }}</td>
     </ng-container>
-    <ng-container matColumnDef="productDescription">
-      <th mat-header-cell *matHeaderCellDef>Description</th>
+    <ng-container matColumnDef="customerEmail">
+      <th mat-header-cell *matHeaderCellDef>customerEmail</th>
+      <td mat-cell *matCellDef="let element">{{ element?.customerEmail }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="customerPhone">
+      <th mat-header-cell *matHeaderCellDef>customerPhone</th>
       <td mat-cell *matCellDef="let element">
-        {{ element?.productDescription }}
+        {{ element?.customerPhone || "-" }}
       </td>
     </ng-container>
-    <!-- <ng-container matColumnDef="category_name">
-      <th mat-header-cell *matHeaderCellDef>Category</th>
-      <td mat-cell *matCellDef="let element">{{ element?.category_name }}</td>
-    </ng-container> -->
-    <ng-container matColumnDef="productCostPrice">
-      <th mat-header-cell *matHeaderCellDef>Cost Price</th>
+    <ng-container matColumnDef="customerAddress">
+      <th mat-header-cell *matHeaderCellDef>customerAddress</th>
       <td mat-cell *matCellDef="let element">
-        {{ element?.productCostPrice }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="productSellingPrice">
-      <th mat-header-cell *matHeaderCellDef>Selling Price</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element?.productSellingPrice }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="productQuantityInStock">
-      <th mat-header-cell *matHeaderCellDef>Quantity In Stock</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element?.productQuantityInStock }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="productReorderPoint">
-      <th mat-header-cell *matHeaderCellDef>Reorder Point</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element?.productReorderPoint }}
+        {{ element?.customerAddress || "-" }}
       </td>
     </ng-container>
 
@@ -65,7 +48,7 @@
           <div class="example-button-container">
             <button
               mat-icon-button
-              (click)="openAddProductDialog(element, 'Update Product')"
+              (click)="openAddProductDialog(element, 'Update Customer')"
               [matTooltip]="'Update changes'"
               color="primary"
               aria-label="Example icon button with a home icon"

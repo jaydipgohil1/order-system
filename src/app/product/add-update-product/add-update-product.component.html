@@ -3,68 +3,36 @@
     <div class="LoginFormInnerContainer">
       <form [formGroup]="productForm">
         <div class="field-container">
-          <div class="inputContainer">
-            <mat-form-field>
+          <div class="inputContainer description-field">
+            <mat-form-field class="description-field">
               <mat-label>Product Name</mat-label>
               <input
                 matInput
                 placeholder="Product Name"
-                formControlName="product_name"
+                formControlName="productName"
                 maxlength="30"
               />
               <mat-error
-                *ngIf="productForm.get('product_name')?.hasError('required')"
+                *ngIf="productForm.get('productName')?.hasError('required')"
               >
                 Product name is required
               </mat-error>
               <mat-error
-                *ngIf="productForm.get('product_name')?.hasError('maxlength')"
+                *ngIf="productForm.get('productName')?.hasError('maxlength')"
               >
                 Name is less than 50 char.
               </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="inputContainer">
-            <mat-form-field>
-              <mat-label>Category</mat-label>
-              <mat-select
-                formControlName="category_id"
-                placeholder="Select Category"
-              >
-                <mat-option [value]="" (click)="addCategory()">
-                  <mat-icon>add</mat-icon>
-                  Add category
-                </mat-option>
-                <mat-option
-                  *ngFor="let category of categories"
-                  [value]="category._id"
-                >
-                  {{ category.category_name }}
-                </mat-option>
-                <mat-option
-                  *ngIf="!categories?.length"
-                  [value]=""
-                  (click)="addCategory()"
-                >
-                  No category found, please Add category
-                </mat-option>
-              </mat-select>
-              <mat-error
-                *ngIf="productForm.get('category_id')?.hasError('required')"
-                >Category is required</mat-error
-              >
             </mat-form-field>
           </div>
         </div>
         <div class="field-container">
           <div class="inputContainer description-field">
             <mat-form-field class="description-field">
-              <mat-label>Description</mat-label>
+              <mat-label>Product Description</mat-label>
               <textarea
                 matInput
                 placeholder="Description"
-                formControlName="description"
+                formControlName="productDescription"
               ></textarea>
             </mat-form-field>
           </div>
@@ -78,10 +46,12 @@
                 matInput
                 placeholder="Cost Price"
                 type="number"
-                formControlName="cost_price"
+                formControlName="productCostPrice"
               />
               <mat-error
-                *ngIf="productForm.get('cost_price')?.hasError('required')"
+                *ngIf="
+                  productForm.get('productCostPrice')?.hasError('required')
+                "
                 >Cost price is required</mat-error
               >
             </mat-form-field>
@@ -94,12 +64,8 @@
                 matInput
                 placeholder="Selling Price"
                 type="number"
-                formControlName="selling_price"
+                formControlName="productSellingPrice"
               />
-              <mat-error
-                *ngIf="productForm.get('selling_price')?.hasError('required')"
-                >Selling price is required</mat-error
-              >
             </mat-form-field>
           </div>
         </div>
@@ -112,11 +78,13 @@
                 matInput
                 placeholder="Quantity in Stock"
                 type="number"
-                formControlName="quantity_in_stock"
+                formControlName="productQuantityInStock"
               />
               <mat-error
                 *ngIf="
-                  productForm.get('quantity_in_stock')?.hasError('required')
+                  productForm
+                    .get('productQuantityInStock')
+                    ?.hasError('required')
                 "
                 >Quantity in stock is required</mat-error
               >
@@ -130,7 +98,7 @@
                 matInput
                 placeholder="Reorder Point"
                 type="number"
-                formControlName="reorder_point"
+                formControlName="productReorderPoint"
               />
             </mat-form-field>
           </div>

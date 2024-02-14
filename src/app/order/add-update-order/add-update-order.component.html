@@ -1,0 +1,107 @@
+<div class="form">
+  <div class="FormContainer">
+    <div class="LoginFormInnerContainer">
+      <form [formGroup]="orderForm">
+        <div class="inputContainer">
+          <mat-form-field class="description-field">
+            <mat-label>Select Customer</mat-label>
+            <mat-select
+              formControlName="customerId"
+              placeholder="Select Customer"
+            >
+              <mat-option *ngFor="let c of customers" [value]="c.customerId">
+                {{ c.customerName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="orderForm.get('customerId')?.hasError('required')"
+              >customer is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="field-container">
+          <div class="inputContainer description-field">
+            <mat-form-field class="description-field">
+              <mat-label>Choose a date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="orderDate"
+              />
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="inputContainer">
+          <mat-form-field class="description-field">
+            <mat-label>Product</mat-label>
+            <mat-select
+              formControlName="productId"
+              placeholder="Select Product"
+              (selectionChange)="changeProduct($event.value)"
+            >
+              <mat-option *ngFor="let p of products" [value]="p.productId">
+                {{ p.productName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="orderForm.get('productId')?.hasError('required')"
+              >Category is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="inputContainer">
+          <mat-form-field class="description-field">
+            <mat-label>Order Quantity</mat-label>
+            <input
+              matInput
+              placeholder="Order Quantity"
+              type="number"
+              formControlName="orderDetailQuantity"
+            />
+            <mat-error
+              *ngIf="orderForm.get('orderDetailQuantity')?.hasError('required')"
+              >Order Quantity is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="inputContainer">
+          <mat-form-field class="description-field">
+            <mat-label>Order Unit Price</mat-label>
+            <input
+              matInput
+              [disabled]="true"
+              placeholder="Order Unit Price"
+              type="number"
+              formControlName="orderDetailUnitPrice"
+              [readonly]="true"
+            />
+            <mat-error
+              *ngIf="orderForm.get('productCostPrice')?.hasError('required')"
+              >Order Unit Price is required</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <span class="button-wrapper" action-wrapper>
+          <button mat-button mat-raised-button (click)="onNoClick()">
+            <mat-icon>close</mat-icon>
+            Cancel
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            cdkFocusInitial
+            [disabled]="orderForm.invalid"
+            (click)="onSaveClick()"
+          >
+            <mat-icon>save</mat-icon>
+            Submit
+          </button>
+        </span>
+      </form>
+    </div>
+  </div>
+</div>

@@ -20,13 +20,13 @@ import { IDialogData } from '../interface/shared.interface';
 })
 export class ProductComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  products: Product[] = [];
+  products: any[] = [];
   categories: Category[] = [];
-  displayedColumns: string[] = ['no', 'product_name', "description", 'category_name', 'cost_price', 'selling_price',
-    'quantity_in_stock', 'reorder_point', 'actions'];
+  displayedColumns: string[] = ['no', 'productName', "productDescription", 'productCostPrice', 'productSellingPrice',
+    'productQuantityInStock', 'productReorderPoint', 'actions'];
 
   dataSource = new MatTableDataSource<Product>(this.products);
-  selectedProduct: Product | null = null;
+  selectedProduct: any | null = null;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -54,7 +54,7 @@ export class ProductComponent {
         if (result?.component == "AddUpdateProductComponent")
           this.openSaveChanges(result.isUpdate ? this.selectedProduct : null, result);
       })
-    this.getCategoryList();
+    // this.getCategoryList();
   }
 
   getProductList(): void {
@@ -87,12 +87,10 @@ export class ProductComponent {
 
   public openAddProductDialog(element: Product | null, title = 'Add Product'): void {
     this.selectedProduct = element;
-    if (!this.categories.length)
-      this.notificationService.showWarning('No category found, please Add New category!');
     if (element)
-      this.iDialogService.setDialogShow(true, title, AddUpdateProductComponent, true, { categories: this.categories, element });
+      this.iDialogService.setDialogShow(true, title, AddUpdateProductComponent, true, { element });
     else
-      this.iDialogService.setDialogShow(true, title, AddUpdateProductComponent, false, { categories: this.categories });
+      this.iDialogService.setDialogShow(true, title, AddUpdateProductComponent, false, {});
   }
 
   openSaveChanges(element: null | Product = null, result: IDialogData | any = null): void {
@@ -101,18 +99,16 @@ export class ProductComponent {
     try {
       if (element) {
         this.productsService.updateProduct(
-          element._id as string,
+          element.productId as string,
           result.form.value,
         ).subscribe((product) => {
-          if (!product.data || !product?.data?.modifiedCount) return;
+          if (!product.success) return;
 
-          const index = this.products.findIndex(product => product._id == element?._id);
+          const index = this.products.findIndex(product => product.productId == element?.productId);
           if (index !== -1) {
-            const category = this.categories.find(category => category._id === result?.form?.value?.category_id);
             this.products[index] = {
               ...this.products[index],
               ...result.form.value,
-              category_name: category?.category_name || ''
             };
             this.loadData();
           }
@@ -123,11 +119,8 @@ export class ProductComponent {
         this.productsService.addProduct(
           result.form.value,
         ).subscribe((product) => {
-          if (!product.data) return;
-          const category = this.categories.find(category => category._id === result?.form?.value?.category_id);
-          product.data.category_name = category?.category_name || '';
-          this.products.unshift(product.data);
-          this.loadData();
+          if (!product.success) return;
+          this.getProductList();
           this.notificationService.showSuccess('Product Added Successfully!');
         })
       }
@@ -142,14 +135,14 @@ export class ProductComponent {
   }
 
   deleteProduct(): void {
-    if (!this.selectedProduct?._id) return;
+    if (!this.selectedProduct?.productId) return;
     try {
       this.productsService.deleteProduct(
-        this.selectedProduct._id as string
+        this.selectedProduct.productId as string
       ).subscribe((product) => {
-        if (!product.data || !product?.data?.deletedCount) return;
+        if (!product.success) return;
         this.notificationService.showSuccess('Product deleted Successfully!');
-        const indexToRemove = this.products.findIndex(category => category._id == this.selectedProduct?._id);
+        const indexToRemove = this.products.findIndex((category) => category.productId == this.selectedProduct?.productId);
         if (indexToRemove !== -1) {
           this.products.splice(indexToRemove, 1);
           this.loadData();
