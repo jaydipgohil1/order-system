@@ -60,7 +60,7 @@ export class ProductComponent {
   getProductList(): void {
     try {
       this.productsService.getProductsList().subscribe((product) => {
-        if (!product.data) return;
+        if (!product?.data) return;
         this.products = product.data;
         this.loadData();
       });

@@ -88,12 +88,13 @@ export class CustomerComponent {
           element.customerId as string,
           result.form.value,
         ).subscribe((customer) => {
-          if (!customer.success) return;
+          if (!customer.success || !customer.data) return;
           const index = this.customer.findIndex(customer => customer.customerId == element?.customerId);
           if (index !== -1) {
             this.customer[index] = {
               ...this.customer[index],
               ...result.form.value,
+              ...customer.data
             };
             this.loadData();
           }
@@ -104,8 +105,9 @@ export class CustomerComponent {
         this.customersService.addCustomer(
           result.form.value,
         ).subscribe((customer) => {
-          if (!customer.success) return;
-          this.getCustomerList();
+          if (!customer.success || !customer.data) return;
+          this.customer.unshift(customer.data);
+          this.loadData();
           this.notificationService.showSuccess('Customer Added Successfully!');
         })
       }

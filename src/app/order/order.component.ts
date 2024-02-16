@@ -90,7 +90,7 @@ export class OrderComponent {
   getProductList() {
     try {
       this.productsService.getProductsList().subscribe((product) => {
-        if (!product.data) return;
+        if (!product?.data) return;
         this.products = product.data;
         this.loadData();
       });
@@ -102,7 +102,7 @@ export class OrderComponent {
   getOrdersList(): void {
     try {
       this.orderService.getOrdersList().subscribe((product) => {
-        if (!product.data) return;
+        if (!product?.data) return;
         this.orders = product.data;
         this.loadData();
       });
