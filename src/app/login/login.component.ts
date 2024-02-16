@@ -35,15 +35,9 @@ export class LoginComponent {
     if (this.loginForm.invalid) return
     try {
       this.userService.login(this.loginForm.value).subscribe(user => {
-        if (!user?.data?.token) return;
-
-        localStorage.setItem('token', JSON.stringify(user?.data?.token));
-        localStorage.setItem('user', JSON.stringify({
-          email: user?.data?.email,
-          name: user?.data?.name,
-          role: user?.data?.role,
-          _id: user?.data?._id
-        }));
+        if (!user?.token) return;
+        localStorage.setItem('token', JSON.stringify(user?.token));
+        this.authService.setToken(user?.token);
         this.authService.setIsAuthentic(true);
         this.initForm();
         this.router.navigate(['/home']);

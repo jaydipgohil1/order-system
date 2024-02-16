@@ -13,18 +13,18 @@ export class UserService {
   constructor(private http: HttpService) { }
 
   register(payload: UserPayload): Observable<any> {
-    return this.http.post(`users/register`, payload);
+    return this.http.post(`user/register`, payload);
   }
 
   login(payload: UserPayload): Observable<any> {
-    return this.http.post(`users/login`, payload);
+    return this.http.post(`user/login`, payload);
   }
 
   getUserList(): Observable<any> {
-    return this.http.get(`users/list`);
+    return this.http.get(`user/list`);
   }
 
   updateUserRoleAndStatus(id: String, body: UserUpdate): Observable<any> {
-    return this.http.patch(`users/update/${id}`, body);
+    return this.http.patch(`user/update/${id}`, body);
   }
 }

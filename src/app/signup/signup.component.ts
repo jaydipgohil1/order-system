@@ -39,7 +39,7 @@ export class SignupComponent {
     if (this.registerForm.invalid) return
     try {
       this.userService.register(this.registerForm.value).subscribe((user) => {
-        if (!user.data) return;
+        if (!user.message) return;
         this.notificationService.showSuccess('Registration Successfully!');
         this.initForm();
       });
