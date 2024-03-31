@@ -13,7 +13,6 @@ import { SharedService } from '../services/shared.service';
 import { AddUpdateOrderComponent } from './add-update-order/add-update-order.component';
 import { OrderService } from '../services/order.service';
 import { ProductsService } from '../services/products.service';
-import { CustomersService } from '../services/customer.service';
 
 @Component({
   selector: 'app-order',
@@ -46,19 +45,16 @@ export class OrderComponent {
 
   constructor(
     private orderService: OrderService,
-    private customersService: CustomersService,
     private productsService: ProductsService,
     public notificationService: NotificationService,
     private sharedService: SharedService,
     public dialog: MatDialog,
     private iDialogService: IDialogService
   ) {
-    this.sharedService.setIsAuthentic('Orders');
   }
 
   ngOnInit(): void {
     this.getOrdersList();
-    this.getCustomerList();
     this.getProductList();
     this.sharedService.deleteDialogResult$
       .pipe(takeUntil(this.destroy$))
@@ -73,18 +69,6 @@ export class OrderComponent {
         if (result?.component == "AddUpdateOrderComponent")
           this.openSaveChanges(result.isUpdate ? this.selectedProduct : null, result);
       })
-  }
-
-  getCustomerList() {
-    try {
-      this.customersService.getCustomersList().subscribe((customer) => {
-        if (!customer.data) return;
-        this.customer = customer.data;
-        this.loadData();
-      });
-    } catch (error: any) {
-      this.notificationService.showError('Something went wrong:' + error);
-    }
   }
 
   getProductList() {

@@ -7,7 +7,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Inventory Management System';
+  title = 'Order System';
   isLogin: boolean = true;
 
   constructor(private authService: AuthService) { }

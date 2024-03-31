@@ -40,7 +40,6 @@ export class CategoryComponent {
     private sharedService: SharedService,
     public dialog: MatDialog,
   ) {
-    this.sharedService.setIsAuthentic('Category');
   }
 
   ngOnInit(): void {

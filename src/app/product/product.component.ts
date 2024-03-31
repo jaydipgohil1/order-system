@@ -36,7 +36,6 @@ export class ProductComponent {
     public dialog: MatDialog,
     private iDialogService: IDialogService
   ) {
-    this.sharedService.setIsAuthentic('Products');
   }
 
   ngOnInit(): void {
